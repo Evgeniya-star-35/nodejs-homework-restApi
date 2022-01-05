@@ -1,5 +1,4 @@
 import { Router } from "express";
-// import { registration } from "../../controllers/users";
 import limiter from "../../middlewares/users/rateLimit";
 import { UserService } from "../../controllers/users";
 const usersService = new UserService();
