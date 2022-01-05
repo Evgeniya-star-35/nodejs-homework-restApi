@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { logout } from "../../controllers/users";
 import guard from "../../middlewares/users/guard";
+import { UserService } from "../../controllers/users";
+const usersService = new UserService();
 
 const logoutRouter = new Router();
 
-logoutRouter.get("/logout", guard, logout);
+logoutRouter.get("/logout", guard, usersService.logout);
 
 export default logoutRouter;
