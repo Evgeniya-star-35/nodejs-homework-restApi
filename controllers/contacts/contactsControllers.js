@@ -19,23 +19,12 @@ class ContactsService {
     });
   }
 
-  async removeContactCb(req, res, next) {
-    const { id } = req.params;
+  async getContacts(req, res, next) {
     const { id: userId } = req.user;
-    const contact = await removeContact(userId, id);
-    if (contact) {
-      return res.status(HttpCode.OK).json({
-        status: "success",
-        code: HttpCode.OK,
-        data: { contact },
-        message: "Contact deleted",
-      });
-    }
-    res.status(HttpCode.NOT_FOUND).json({
-      status: "error",
-      code: HttpCode.NOT_FOUND,
-      message: "Not found",
-    });
+    const contacts = await listContacts(userId, req.query);
+    res
+      .status(HttpCode.OK)
+      .json({ status: "success", code: HttpCode.OK, data: { ...contacts } });
   }
 
   async getContactByIdCb(req, res, next) {
@@ -55,12 +44,23 @@ class ContactsService {
     });
   }
 
-  async getContacts(req, res, next) {
+  async removeContactCb(req, res, next) {
+    const { id } = req.params;
     const { id: userId } = req.user;
-    const contacts = await listContacts(userId, req.query);
-    res
-      .status(HttpCode.OK)
-      .json({ status: "success", code: HttpCode.OK, data: { ...contacts } });
+    const contact = await removeContact(userId, id);
+    if (contact) {
+      return res.status(HttpCode.OK).json({
+        status: "success",
+        code: HttpCode.OK,
+        data: { contact },
+        message: "Contact deleted",
+      });
+    }
+    res.status(HttpCode.NOT_FOUND).json({
+      status: "error",
+      code: HttpCode.NOT_FOUND,
+      message: "Not found",
+    });
   }
 
   async updateContactCb(req, res, next) {
@@ -72,13 +72,11 @@ class ContactsService {
         .status(HttpCode.OK)
         .json({ status: "success", code: HttpCode.OK, data: { contact } });
     }
-    res
-      .status(HttpCode.NOT_FOUND)
-      .json({
-        status: "error",
-        code: HttpCode.NOT_FOUND,
-        message: "Not found",
-      });
+    res.status(HttpCode.NOT_FOUND).json({
+      status: "error",
+      code: HttpCode.NOT_FOUND,
+      message: "Not found",
+    });
   }
 }
 export default ContactsService;

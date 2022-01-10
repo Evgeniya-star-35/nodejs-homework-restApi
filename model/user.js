@@ -1,5 +1,6 @@
 import pkg from "mongoose";
 import bcrypt from "bcryptjs";
+import gravatar from "gravatar/lib/gravatar";
 import { Role } from "../lib/constants";
 
 const { Schema, model } = pkg;
@@ -25,6 +26,10 @@ const userSchema = new Schema(
       default: "starter",
     },
     token: {
+      type: String,
+      default: null,
+    },
+    avatarURL: {
       type: String,
       default: null,
     },
