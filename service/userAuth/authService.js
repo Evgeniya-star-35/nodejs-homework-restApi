@@ -5,13 +5,16 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 class AuthService {
   async create(body) {
-    const { id, name, email, role, owner } = await Users.createUser(body);
+    const { id, name, email, role, owner, avatar } = await Users.createUser(
+      body
+    );
     return {
       id,
       name,
       email,
       role,
       owner,
+      avatar,
     };
   }
 

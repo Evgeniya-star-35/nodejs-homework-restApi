@@ -1,6 +1,9 @@
 import express from "express";
 import logger from "morgan";
 import cors from "cors";
+import helmet from "helmet";
+import { HttpCode, LIMIT_JSON } from "./lib/constants";
+
 import {
   createRouter,
   getByIdRouter,
@@ -15,24 +18,29 @@ import {
   logoutRouter,
   currentRouter,
   avatarRouter,
+  roleRouter,
 } from "./routes/users";
-import { HttpCode } from "./lib/constants";
 
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
+app.use(helmet());
 app.use(logger(formatsLogger));
+app.use(express.static(process.env.FOLDER_FOR_AVATARS));
 app.use(cors());
-app.use(express.json()); // json
-app.use(express.urlencoded({ extended: false })); // forms
-app.use(express.static("public"));
+app.use(express.json({ limit: LIMIT_JSON })); // json
+app.use((req, res, next) => {
+  app.set("lang", req.acceptsLanguages(["en", "ru"]));
+  next();
+});
 
 app.use("/users", registrationRouter);
 app.use("/users", loginRouter);
 app.use("/users", logoutRouter);
 app.use("/users", currentRouter);
 app.use("/users", avatarRouter);
+app.use("/users", roleRouter);
 
 app.use("/contacts", listContactsRouter);
 app.use("/contacts", updateRouter);

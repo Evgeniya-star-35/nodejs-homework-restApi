@@ -1,15 +1,9 @@
 import { Router } from "express";
-import { UserService } from "../../controllers/users";
+import { uploadAvatar } from "../../controllers/avatars/avatars";
 import upload from "../../middlewares/users/upload";
-import { validateUploadAvatar } from "../../middlewares/users/validateAvatar";
 import guard from "../../middlewares/users/guard";
 const avatarRouter = new Router();
-const usersService = new UserService();
 
-avatarRouter.patch(
-  "/avatars",
-  [guard, upload.single("avatar"), validateUploadAvatar],
-  usersService.addAvatars
-);
+avatarRouter.patch("/avatars", guard, upload.single("avatar"), uploadAvatar);
 
 export default avatarRouter;

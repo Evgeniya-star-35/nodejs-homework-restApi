@@ -3,12 +3,12 @@ import removeContact from "./removeContact";
 import getContactById from "./getById";
 import listContacts from "./listContacts";
 import updateContact from "./updateContact";
-// import updateStatusContact from "./patchContact";
+import getStatisticContacts from "./getStatisticContacts";
 export {
   addContact,
   removeContact,
   getContactById,
   listContacts,
   updateContact,
-  // updateStatusContact,
+  getStatisticContacts,
 };

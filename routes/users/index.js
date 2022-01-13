@@ -3,6 +3,7 @@ import logoutRouter from "./logoutRoute";
 import loginRouter from "./loginRoute";
 import currentRouter from "./getCurrentUser";
 import avatarRouter from "./avatarRouter";
+import roleRouter from "./roleRouter";
 
 export {
   registrationRouter,
@@ -10,4 +11,5 @@ export {
   loginRouter,
   currentRouter,
   avatarRouter,
+  roleRouter,
 };

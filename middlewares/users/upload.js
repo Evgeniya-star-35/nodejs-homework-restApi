@@ -1,22 +1,24 @@
 import multer from "multer";
-import * as path from "path";
+const UPLOAD_DIR = process.env.UPLOAD_DIR;
 
-const tempDir = path.join(process.cwd(), "/tmp");
-
-const uploadConfig = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, tempDir);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, UPLOAD_DIR);
   },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-  limits: {
-    fileSize: 1048576,
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now().toString()}_${file.originalname}`);
   },
 });
 
 const upload = multer({
-  storage: uploadConfig,
-});
+  storage: storage,
+  limits: { fileSize: 1000000 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.includes("image")) {
+      return cb(null, true);
+    }
 
+    cb(new Error("Wrong format file for avatar!"));
+  },
+});
 export default upload;
