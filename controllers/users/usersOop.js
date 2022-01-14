@@ -63,20 +63,5 @@ class UserService {
       .status(HttpCode.OK)
       .json({ status: "success", code: HttpCode.OK, data });
   }
-
-  // async addAvatars(req, res, next) {
-  //   const { file } = req;
-  //   const { _id: userId, avatarURL } = req.user;
-  //   const newPathAvatar = await names.updateAvatar({
-  //     userId,
-  //     file,
-  //     avatarURL,
-  //   });
-  //   res.status(200).json({
-  //     status: "success",
-  //     code: HttpCode.OK,
-  //     avatarURL: newPathAvatar,
-  //   });
-  // }
 }
 export default UserService;

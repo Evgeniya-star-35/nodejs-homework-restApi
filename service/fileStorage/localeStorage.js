@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
 import Users from "../../repository/users";
-console.log(Users.updateAvatar);
 
 class LocalStorage {
   constructor(file, user) {

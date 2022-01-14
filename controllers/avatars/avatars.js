@@ -2,8 +2,8 @@ import { getStatisticContacts } from "../../repository/contacts";
 import { HttpCode } from "../../lib/constants";
 import {
   AvatarStorage,
-  // LocalFileStorage,
-  CloudFileStorage,
+  LocalFileStorage,
+  // CloudFileStorage,
 } from "../../service/fileStorage";
 
 const aggregation = async (req, res, next) => {
@@ -20,7 +20,7 @@ const aggregation = async (req, res, next) => {
 };
 
 const uploadAvatar = async (req, res, next) => {
-  const uploadService = new AvatarStorage(CloudFileStorage, req.file, req.user);
+  const uploadService = new AvatarStorage(LocalFileStorage, req.file, req.user);
 
   const avatarUrl = await uploadService.updateAvatar();
 
