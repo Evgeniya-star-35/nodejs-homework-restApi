@@ -1,5 +1,6 @@
 import { getStatisticContacts } from "../../repository/contacts";
 import { HttpCode } from "../../lib/constants";
+// можно выбрать хранилище
 import {
   AvatarStorage,
   LocalFileStorage,
