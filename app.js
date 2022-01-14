@@ -4,14 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import { HttpCode, LIMIT_JSON } from "./lib/constants";
 
-import {
-  createRouter,
-  getByIdRouter,
-  updateRouter,
-  deleteRouter,
-  listContactsRouter,
-  patchContactRouter,
-} from "./routes/contacts";
+import contactRouter from "./routes/contacts";
 import {
   registrationRouter,
   loginRouter,
@@ -42,12 +35,12 @@ app.use("/users", currentRouter);
 app.use("/users", avatarRouter);
 app.use("/users", roleRouter);
 
-app.use("/contacts", listContactsRouter);
-app.use("/contacts", updateRouter);
-app.use("/contacts", createRouter);
-app.use("/contacts", deleteRouter);
-app.use("/contacts", getByIdRouter);
-app.use("/contacts", patchContactRouter);
+app.use("/contacts", contactRouter.listContactsRouter);
+app.use("/contacts", contactRouter.updateRouter);
+app.use("/contacts", contactRouter.createRouter);
+app.use("/contacts", contactRouter.deleteRouter);
+app.use("/contacts", contactRouter.getByIdRouter);
+app.use("/contacts", contactRouter.patchContactRouter);
 
 app.use((req, res) => {
   res
