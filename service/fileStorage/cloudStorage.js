@@ -27,17 +27,13 @@ class CloudStorage {
         folder: this.folderAvatars,
       });
 
-    console.log(
-      "🚀 ~ file: cloud-storage.js ~ line 25 ~ CloudStorage ~ save ~ returnedIdAvatarCloud",
-      returnedIdAvatarCloud
-    );
     const newIdAvatarCloud = returnedIdAvatarCloud.replace(
       `${this.folderAvatars}/`,
       ""
     );
 
     await Users.updateAvatar(this.userId, avatarUrl, newIdAvatarCloud);
-    // Почистить за собой папку uploads
+    // Почистить за собой папку tmp
     await this.removeUploadFile(this.filePath);
     return avatarUrl;
   }
