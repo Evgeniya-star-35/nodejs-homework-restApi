@@ -1,5 +1,5 @@
-import { HttpCode } from "../lib/constants";
-import { FORBIDDEN } from "../lib/messages";
+import { HttpCode } from "../../lib/constants";
+import { FORBIDDEN } from "../../lib/messages";
 
 const guardRole = (role) => async (req, res, next) => {
   const roleCurrentUser = req.user.role;
