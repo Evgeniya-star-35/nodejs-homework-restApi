@@ -128,7 +128,7 @@ class UserService {
         return res.status(HttpCode.OK).json({
           status: "success",
           code: HttpCode.OK,
-          data: { message: "Success" },
+          data: { message: "Verification email sent" },
         });
       }
       return res.status(HttpCode.SE).json({
