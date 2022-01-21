@@ -36,7 +36,7 @@ class EmailService {
           button: {
             color: "#22BC66",
             text: "Confirm your account",
-            link: `${this.link}/users/verify/${verifyToken}`,
+            link: `${this.link}users/verify/${verifyToken}`,
           },
         },
         outro: "You need help, write to us, but better send money.",
