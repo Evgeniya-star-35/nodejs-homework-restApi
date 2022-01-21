@@ -1,3 +1,3 @@
 import UserService from "./usersOop";
 
-export { UserService };
+export default UserService;

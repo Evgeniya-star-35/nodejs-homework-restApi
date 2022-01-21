@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import repositoryUsers from "../../repository/users";
+import { findById } from "../../repository/users";
 import { HttpCode } from "../../lib/constants";
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
@@ -24,7 +24,7 @@ const guard = async (req, res, next) => {
     });
   }
   const payload = jwt.decode(token);
-  const user = await repositoryUsers.findById(payload.id);
+  const user = await findById(payload.id);
   if (!user || user.token !== token) {
     return res.status(HttpCode.UNAUTHORIZED).json({
       status: "error",

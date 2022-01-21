@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import { promisify } from "util";
 import { unlink } from "fs/promises";
-import Users from "../../repository/users";
+import { updateAvatar } from "../../repository/users";
 import { CLOUD_FOLDER_AVATARS } from "../../lib/constants";
 
 cloudinary.config({
@@ -32,7 +32,7 @@ class CloudStorage {
       ""
     );
 
-    await Users.updateAvatar(this.userId, avatarUrl, newIdAvatarCloud);
+    await updateAvatar(this.userId, avatarUrl, newIdAvatarCloud);
     // Почистить за собой папку tmp
     await this.removeUploadFile(this.filePath);
     return avatarUrl;
