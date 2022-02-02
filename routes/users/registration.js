@@ -1,6 +1,6 @@
 import { Router } from "express";
 import limiter from "../../middlewares/users/rateLimit";
-import { UserService } from "../../controllers/users";
+import UserService from "../../controllers/users";
 const usersService = new UserService();
 
 const registrationRouter = new Router();

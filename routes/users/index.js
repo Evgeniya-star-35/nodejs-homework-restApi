@@ -4,6 +4,8 @@ import loginRouter from "./loginRoute";
 import currentRouter from "./getCurrentUser";
 import avatarRouter from "./avatarRouter";
 import roleRouter from "./roleRouter";
+import verifyRouter from "./verifyRouter";
+import verifyTokenRouter from "./verifyTokenRouter";
 
 export {
   registrationRouter,
@@ -12,4 +14,6 @@ export {
   currentRouter,
   avatarRouter,
   roleRouter,
+  verifyRouter,
+  verifyTokenRouter,
 };

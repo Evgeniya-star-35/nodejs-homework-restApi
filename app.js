@@ -2,6 +2,7 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import helmet from "helmet";
+
 import { HttpCode, LIMIT_JSON } from "./lib/constants";
 
 import contactRouter from "./routes/contacts";
@@ -12,6 +13,8 @@ import {
   currentRouter,
   avatarRouter,
   roleRouter,
+  verifyRouter,
+  verifyTokenRouter,
 } from "./routes/users";
 
 const app = express();
@@ -34,6 +37,8 @@ app.use("/users", logoutRouter);
 app.use("/users", currentRouter);
 app.use("/users", avatarRouter);
 app.use("/users", roleRouter);
+app.use("/users", verifyRouter);
+app.use("/users", verifyTokenRouter);
 
 app.use("/contacts", contactRouter.listContactsRouter);
 app.use("/contacts", contactRouter.updateRouter);
@@ -55,4 +60,5 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
+
 export default app;

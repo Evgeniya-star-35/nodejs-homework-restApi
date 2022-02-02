@@ -1,6 +1,6 @@
 import { Router } from "express";
 import guard from "../../middlewares/users/guard";
-import { UserService } from "../../controllers/users";
+import UserService from "../../controllers/users";
 const usersService = new UserService();
 
 const logoutRouter = new Router();

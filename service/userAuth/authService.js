@@ -1,20 +1,19 @@
 import jwt from "jsonwebtoken";
-import Users from "../../repository/users";
+import { createUser, findByEmail, updateToken } from "../../repository/users";
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 class AuthService {
   async create(body) {
-    const { id, name, email, role, owner, avatar } = await Users.createUser(
-      body
-    );
+    const { id, name, email, role, avatar, verifyTokenEmail } =
+      await createUser(body);
     return {
       id,
       name,
       email,
       role,
-      owner,
       avatar,
+      verifyTokenEmail,
     };
   }
 
@@ -26,21 +25,21 @@ class AuthService {
   }
 
   async getUser(email, password) {
-    const user = await Users.findByEmail(email);
+    const user = await findByEmail(email);
     const isValidPassword = await user?.isValidPassword(password);
-    if (!isValidPassword) {
+    if (!isValidPassword || null?.isVerify) {
       return null;
     }
     return user;
   }
 
   async isUserExist(email) {
-    const user = await Users.findByEmail(email);
+    const user = await findByEmail(email);
     return !!user;
   }
 
   async setToken(id, token) {
-    await Users.updateToken(id, token);
+    await updateToken(id, token);
   }
 }
 
